@@ -34,14 +34,16 @@ This website inquiry & lead generation system uses **Google Sheets + Google Apps
 4. At the top of `Code.gs`, update:
    - `SHEET_ID`: Replace `'YOUR_GOOGLE_SHEET_ID'` with your Spreadsheet ID from Step 1.
    - `SHEET_NAME`: Keep `'Leads'` (or match your exact sheet tab name).
+   - `NOTIFY_EMAIL`: Set one or comma-separated email addresses to receive instant notifications whenever a new lead arrives (currently `'mushieditz@gmail.com, ahmathmusharraf@gmail.com'`).
    - `TIMEZONE`: Set `'Asia/Colombo'`, `'Asia/Dubai'`, or your preferred IANA timezone.
 5. Click **Save** (`Ctrl + S` / `Cmd + S`).
+6. *(Important for Email Notifications)* Select **`testEmailNotification`** in the top toolbar function dropdown and click **Run** once to grant Google `MailApp` permission and confirm your test email arrives.
 
 ---
 
-## Step 3: Deploy as a Public Web App & Get the URL
+## Step 3: Deploy (or Update) as a Public Web App & Get the URL
 
-1. In the Apps Script editor, click **Deploy → New deployment**.
+1. In the Apps Script editor, click **Deploy → New deployment** (or **Deploy → Manage deployments → Edit (pencil icon) → Version: New version** if updating an existing URL so you keep the same `/exec` link).
 2. Click the gear icon next to **Select type** and choose **Web app**.
 3. Configure deployment settings:
    - **Description**: `Website Lead Capture v1`
