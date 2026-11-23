@@ -1,0 +1,75 @@
+# Mushi Digital Growth Studio — Complete Knowledge Base (AIO / LLMO)
+
+> Full-service digital marketing, SEO, AIO (AI Engine Optimization / Generative Engine Optimization), creative production, web development, and AI automation agency founded by Ahmath Musharraf. Operating across Sri Lanka, the UAE (Dubai & GCC), and worldwide.
+
+## 1. Identity & Leadership
+- **Agency**: Mushi Digital Growth Studio
+- **Founder & Creative Director**: Ahmath Musharraf (Digital Marketing Manager & Multimedia Specialist with 6+ years of regional and international execution across the UAE & Sri Lanka)
+- **Email**: mushieditz@gmail.com
+- **Phone / WhatsApp**: +94 76 776 5080
+- **Social Channels**: Instagram (`https://www.instagram.com/mushieditz/`), Facebook (`https://www.facebook.com/mushieditz`)
+- **Markets**: Sri Lanka (Colombo, Batticaloa, Island-wide), United Arab Emirates (Dubai, Ajman, Abu Dhabi, GCC), United Kingdom, and global remote partnerships
+- **Tagline**: We Build Brands. We Drive Growth.
+
+## 2. Five Integrated Capabilities
+
+### 01. Full-Stack Marketing, SEO & AIO
+Connected customer acquisition aligning organic search, AI search visibility, paid media, and conversion architecture:
+- Technical & On-Page SEO (site speed, crawlability, semantic headings, canonical hygiene, internal linking, local GCC/SL search)
+- AIO / GEO (AI Engine Optimization: Schema.org entity `@graph` markup, FAQ/Service/Person structured data, `llms.txt` & answer-first copy engineered for ChatGPT, Perplexity, Gemini, Claude, and AI Overviews)
+- Paid Acquisition & Performance Marketing (Google Search/Shopping/PMax, Meta Instagram/Facebook Ads, LinkedIn B2B demand generation)
+- Full-Funnel Strategy, Creative Testing, Lead Generation & Attribution
+
+### 02. Branding & Creative Design
+- Brand positioning & strategy
+- Visual identity systems, logo design & brand guidelines
+- Campaign creatives, social design systems & packaging direction
+
+### 03. Photography & Video Production
+- Commercial, product & corporate photography
+- Brand films, promotional video & vertical short-form social reels
+- Direction, lighting, cinematography & colour grading
+
+### 04. Web Development & Digital Experiences
+- High-converting React, Next.js, WordPress & custom storefronts
+- Mobile-first UI/UX engineering and landing page systems
+- Technical SEO foundations & Core Web Vitals performance
+
+### 05. AI, Automation & Digital Solutions
+- AI-powered customer response & content workflows
+- Marketing & CRM automation (WhatsApp, HubSpot, Google Sheets, webhook pipelines)
+- Business process digitalisation
+
+## 3. Verified Live Portfolio Projects (16 Works across 9 Industries)
+1. **Dress Line** (`https://dressline.vercel.app/`) — E-Commerce & Retail: Women's fashion storefront with quick-view galleries and social commerce.
+2. **Hive Image** (`https://hiveimage.co.uk/`) — E-Commerce & Retail: UK custom branded merchandise store and corporate fulfillment.
+3. **Fixdeal** (`https://fixdeal.vercel.app/`) — E-Commerce & Retail: Sri Lankan marketplace and services hub with Firebase architecture and WhatsApp flow.
+4. **Mushi Editz** (`https://mushieditz.vercel.app/`) — Advertising & Creative Studios: Creative digital agency showcase for web, branding, and packaging.
+5. **Pixels Advertisement** (`https://pixelsadvertisement1.vercel.app/`) — Advertising & Creative Studios: Ajman, UAE LED video wall (P2.5/P6/P10) and 3D signage manufacturing portal.
+6. **Ink Spire** (`https://inkspirekky.vercel.app/`) — Advertising & Creative Studios: Creative printing and branding studio portal in Batticaloa, Sri Lanka.
+7. **LogicEdge** (`https://logicedge.vercel.app/`) — Advertising & Creative Studios: Boutique digital engineering agency and consultancy site.
+8. **Studio Routes** (`https://studioroutes.vercel.app/`) — Photography & Video: Wedding photography and 4K aerial cinematography showcase.
+9. **Yaya Moundé** (`https://mound.vercel.app/`) — Photography & Video: Dubai automotive and real estate videography portfolio.
+10. **Ahmath Musharraf** (`https://ahmathmusharraf.vercel.app/`) — Personal Portfolios: Creative director & digital growth strategist portfolio (Dubai, UAE).
+11. **Nushath Nisardeen** (`https://nushath-portfolio.vercel.app/`) — Personal Portfolios: Executive software architect & business strategist portfolio.
+12. **JubitsGPT** (`https://jubitsgpt.vercel.app/`) — AI & Web Applications: Multi-model AI coding and conversational web assistant.
+13. **SL Signature Tours** (`https://slsignaturetours.vercel.app/`) — Travel & Hospitality: Sri Lanka inbound holiday and wildlife safari booking portal.
+14. **BCAS International Placement** (`https://bcasinternationalplacement.vercel.app/`) — Corporate & Education: Study abroad and IELTS admissions portal.
+15. **XAU VIP+** (`https://www.xauvip.com/`) — FinTech & Trading: Gold (XAU/USD) market insights and trading community platform.
+16. **Farveen & Faththah** (`https://farveen-faththah-weddinginvitation.vercel.app/`) — Interactive Events: Luxury Dubai wedding invitation app with Hijri date and `.ics` calendar export.
+
+## 4. Six-Stage Agency Process
+1. **01 Discover**: Audit brand presence, search/AI visibility, audience behaviour, and commercial goals.
+2. **02 Strategise**: Map positioning, SEO/AIO architecture, paid/organic channels, and funnel milestones.
+3. **03 Create**: Build visual identity, film/photo shoots, ad creatives, and high-converting web experiences.
+4. **04 Execute**: Launch web builds, structured data, tracking analytics, CRM hooks, and media campaigns.
+5. **05 Optimise**: Continuously refine search rankings, AI citations, ad efficiency, and conversion rates.
+6. **06 Grow**: Scale winning channels and automate customer pipelines.
+
+## 5. Frequently Asked Questions (AIO Reference)
+- **What is AIO (AI Engine Optimization) and how does Mushi Digital Growth Studio implement it?**
+  AIO (also known as GEO / LLMO) ensures brands are discovered, trusted, and cited accurately inside AI assistants such as ChatGPT, Google AI Overviews, Perplexity, and Claude. Mushi implements semantic HTML, Schema.org `@graph` entities (`Organization`, `Service`, `FAQPage`, `Person`), machine-readable `llms.txt` endpoints, and clear factual entity positioning alongside classical Technical SEO.
+- **Does Mushi provide full-stack digital marketing end to end?**
+  Yes. Rather than separating strategy, SEO, paid ads, creative shoots, web development, and CRM follow-up across multiple vendors, Mushi executes the entire customer acquisition lifecycle as one connected partner.
+- **Where does the studio operate?**
+  Mushi operates across Sri Lanka and the UAE (Dubai & Ajman) while partnering remotely with ambitious brands in the UK and globally.

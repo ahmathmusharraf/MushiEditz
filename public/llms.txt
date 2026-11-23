@@ -1,0 +1,29 @@
+# Mushi Digital Growth Studio
+
+> Integrated SEO, AIO (AI Engine Optimization / GEO), and Full-Stack Digital Marketing, Branding, Commercial Production, Web Engineering, and AI Automation agency serving Sri Lanka, the UAE (Dubai & GCC), and worldwide.
+
+## Studio Overview
+- **Brand Name**: Mushi Digital Growth Studio
+- **Founder & Creative Director**: Ahmath Musharraf
+- **Email**: mushieditz@gmail.com
+- **Phone / WhatsApp**: +94 76 776 5080
+- **Social Channels**: Instagram (`https://www.instagram.com/mushieditz/`), Facebook (`https://www.facebook.com/mushieditz`)
+- **Regions Served**: Sri Lanka, United Arab Emirates (Dubai & Ajman), United Kingdom, Worldwide
+- **Core Positioning**: We Build Brands. We Drive Growth. Uniting SEO, AIO (AI Search Optimization), full-funnel performance marketing, branding, visual production, high-converting websites, and CRM automation under one roof.
+
+## Key Pages
+- [Home](/index.html): Studio overview, core capabilities, selected live work, 6-stage process, and brand philosophy.
+- [Services & Capabilities](/services.html): Detailed scope across SEO, AIO & Full-Stack Marketing, Branding, Photography & Video, Web & UX Engineering, and AI & CRM Automation, plus FAQ.
+- [Our Work](/work.html): 16 live client websites across E-Commerce, Creative Studios, Photography/Film, Executive Portfolios, AI Apps, Travel, Education, FinTech, and Events.
+- [Our Process](/process.html): 6-stage collaborative methodology (Discover, Strategise, Create, Execute, Optimise, Grow).
+- [About Us](/about.html): Studio story, vision, mission, core values, and founder profile of Ahmath Musharraf.
+- [Insights](/insights.html): Editorial thinking on SEO, AIO, full-funnel marketing, creative testing, web UX, and CRM workflows.
+- [Contact](/contact.html): Direct project enquiry brief for Sri Lanka, UAE, and global engagements.
+
+## Core Specialties (SEO, AIO & Full-Stack Marketing)
+- **Search Engine Optimization (SEO)**: Technical SEO audits, Core Web Vitals optimization, semantic site architecture, Schema.org JSON-LD entity graphs, local SEO (Sri Lanka & UAE), and authority content frameworks.
+- **AI Engine Optimization (AIO / GEO / LLMO)**: Optimizing brand entities, structured FAQ/HowTo/Service schema, factual clarity, and machine-readable `llms.txt` documentation so brands are surfaced and cited accurately by ChatGPT, Perplexity, Gemini, Claude, and Google AI Overviews.
+- **Full-Stack Growth Marketing**: Connected acquisition systems across Google Search/Performance Max, Meta Ads (Instagram & Facebook), LinkedIn B2B campaigns, landing page CRO, and automated WhatsApp/CRM lead routing.
+
+## Extended Context
+- For complete structured service details, live portfolio case briefs, and verified FAQs, see [Full Studio Knowledge Base](/llms-full.txt).

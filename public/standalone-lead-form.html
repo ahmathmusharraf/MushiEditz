@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mushi Digital Growth Studio — Lead Inquiry Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #101010;
+        --card: #ffffff;
+        --surface: #f7f6f2;
+        --ink: #111114;
+        --muted: #52525b;
+        --accent: #b69aff;
+        --accent-deep: #6d48c5;
+        --border: rgba(16, 16, 16, 0.14);
+        --error: #b91c1c;
+        --success-bg: #ecfdf5;
+        --success-border: #6ee7b7;
+        --success-ink: #065f46;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 680px;
+        background: var(--card);
+        border-radius: 12px;
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      @media (min-width: 640px) {
+        .card {
+          padding: 36px;
+        }
+      }
+
+      .kicker {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent-deep);
+        letter-spacing: 0.04em;
+      }
+
+      h1 {
+        margin: 6px 0 8px;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+      }
+
+      .subtitle {
+        margin: 0 0 24px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .grid-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      label span {
+        color: var(--accent-deep);
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 14px;
+        font-family: inherit;
+        font-size: 15px;
+        color: var(--ink);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        transition: border-color 150ms ease, background-color 150ms ease;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent-deep);
+        background: #ffffff;
+      }
+
+      textarea {
+        min-height: 112px;
+        resize: vertical;
+      }
+
+      .field-error {
+        margin: 5px 0 0;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--error);
+        display: none;
+      }
+
+      .field.has-error input,
+      .field.has-error select,
+      .field.has-error textarea {
+        border-color: var(--error);
+      }
+
+      .field.has-error .field-error {
+        display: block;
+      }
+
+      /* Honeypot off-screen trap */
+      .hp-trap {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .submit-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: #f7f6f2;
+        background: #101010;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 150ms ease, transform 100ms ease, opacity 150ms ease;
+      }
+
+      @media (min-width: 640px) {
+        .submit-btn {
+          width: auto;
+        }
+      }
+
+      .submit-btn:hover:not(:disabled) {
+        background: #23232b;
+      }
+
+      .submit-btn:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(182, 154, 255, 0.35);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.75s linear infinite;
+        display: none;
+      }
+
+      .submit-btn.is-loading .spinner {
+        display: inline-block;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .status-banner {
+        display: none;
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        border: 1px solid transparent;
+      }
+
+      .status-banner.is-success {
+        display: block;
+        background: var(--success-bg);
+        border-color: var(--success-border);
+        color: var(--success-ink);
+      }
+
+      .status-banner.is-error {
+        display: block;
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="kicker">Project &amp; Course Inquiry</p>
+      <h1>Start a conversation.</h1>
+      <p class="subtitle">
+        Share your requirements below. All inquiries go directly to our team via Google Sheets.
+      </p>
+
+      <form id="leadForm" novalidate>
+        <!-- Hidden Honeypot Spam Field -->
+        <div class="hp-trap" aria-hidden="true">
+          <label for="website_url">Website</label>
+          <input id="website_url" name="website_url" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="grid grid-2">
+          <div class="field" data-field="name">
+            <label for="name">Full Name <span>*</span></label>
+            <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your full name" />
+            <p class="field-error" id="err-name">Please enter your full name (at least 2 characters).</p>
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="email">Email Address <span>*</span></label>
+            <input id="email" name="email" type="email" inputmode="email" required autocomplete="email" placeholder="you@company.com" />
+            <p class="field-error" id="err-email">Please enter a valid email address.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="field" data-field="phone">
+            <label for="phone">Phone Number <span>*</span></label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+94 / +971 / International" />
+            <p class="field-error" id="err-phone">Please enter a valid phone number.</p>
+          </div>
+
+          <div class="field" data-field="interest">
+            <label for="interest">Course or Service Interested In <span>*</span></label>
+            <select id="interest" name="interest" required>
+              <option value="">Select a course or service</option>
+              <option value="Branding & Creative Design">Branding &amp; Creative Design</option>
+              <option value="Digital Marketing & Growth (SEO, AIO & Ads)">Digital Marketing &amp; Growth (SEO, AIO &amp; Ads)</option>
+              <option value="Media Production (Photography & Video)">Media Production (Photography &amp; Video)</option>
+              <option value="Website Development & Digital Experiences">Website Development &amp; Digital Experiences</option>
+              <option value="AI & Workflow Automation">AI &amp; Workflow Automation</option>
+              <option value="Digital Marketing & Growth Training / Course">Digital Marketing &amp; Growth Training / Course</option>
+              <option value="Full-Stack Growth Partner">Full-Stack Growth Partner</option>
+            </select>
+            <p class="field-error" id="err-interest">Please select the course or service you are interested in.</p>
+          </div>
+        </div>
+
+        <div class="field" data-field="message">
+          <label for="message">Message <span>*</span></label>
+          <textarea id="message" name="message" required placeholder="Tell us about your project goals, course questions, or timeline."></textarea>
+          <p class="field-error" id="err-message">Please enter a message (at least 10 characters).</p>
+        </div>
+
+        <button type="submit" id="submitBtn" class="submit-btn">
+          <span class="spinner" aria-hidden="true"></span>
+          <span id="submitBtnText">Submit Inquiry</span>
+        </button>
+
+        <div id="statusBanner" class="status-banner" role="status" aria-live="polite"></div>
+      </form>
+    </main>
+
+    <script>
+      (function () {
+        // 1. CONNECTED GOOGLE APPS SCRIPT WEB APP URL:
+        var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2VfHcOqBr0WI7w-Y9FTxmgWUIEKyecE6bhAZTdmWF1g398ai3tRx7IF2Pts0Ik3sV/exec';
+
+        var DUPLICATE_KEY = 'mushi_standalone_lead_fp';
+        var DUPLICATE_WINDOW_MS = 5 * 60 * 1000;
+        var inFlight = false;
+
+        var form = document.getElementById('leadForm');
+        var submitBtn = document.getElementById('submitBtn');
+        var submitBtnText = document.getElementById('submitBtnText');
+        var statusBanner = document.getElementById('statusBanner');
+
+        // Prefill interest if ?service= or ?interest= is present in URL
+        var params = new URLSearchParams(window.location.search);
+        var prefill = params.get('interest') || params.get('service');
+        if (prefill) {
+          var selectEl = document.getElementById('interest');
+          for (var i = 0; i < selectEl.options.length; i++) {
+            if (selectEl.options[i].value.toLowerCase().indexOf(prefill.toLowerCase()) !== -1) {
+              selectEl.selectedIndex = i;
+              break;
+            }
+          }
+        }
+
+        function setFieldError(name, show) {
+          var wrapper = form.querySelector('[data-field="' + name + '"]');
+          if (!wrapper) return;
+          if (show) {
+            wrapper.classList.add('has-error');
+          } else {
+            wrapper.classList.remove('has-error');
+          }
+        }
+
+        function showStatus(type, text) {
+          statusBanner.className = 'status-banner ' + (type === 'success' ? 'is-success' : 'is-error');
+          statusBanner.textContent = text;
+        }
+
+        function setLoading(loading) {
+          inFlight = loading;
+          submitBtn.disabled = loading;
+          if (loading) {
+            submitBtn.classList.add('is-loading');
+            submitBtnText.textContent = 'Sending Inquiry...';
+          } else {
+            submitBtn.classList.remove('is-loading');
+            submitBtnText.textContent = 'Submit Inquiry';
+          }
+        }
+
+        function buildFingerprint(email, interest, message) {
+          return [email.toLowerCase(), interest.toLowerCase(), message.toLowerCase()].join('|');
+        }
+
+        function isDuplicate(fp) {
+          try {
+            var raw = sessionStorage.getItem(DUPLICATE_KEY);
+            if (!raw) return false;
+            var saved = JSON.parse(raw);
+            return saved.fp === fp && Date.now() - saved.ts < DUPLICATE_WINDOW_MS;
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function saveFingerprint(fp) {
+          try {
+            sessionStorage.setItem(DUPLICATE_KEY, JSON.stringify({ fp: fp, ts: Date.now() }));
+          } catch (e) {}
+        }
+
+        form.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          if (inFlight) return;
+
+          var name = form.name.value.trim();
+          var email = form.email.value.trim();
+          var phone = form.phone.value.trim();
+          var interest = form.interest.value.trim();
+          var message = form.message.value.trim();
+          var honeypot = form.website_url.value.trim();
+
+          // Honeypot trap triggered
+          if (honeypot.length > 0) {
+            showStatus('error', 'Unable to process submission.');
+            return;
+          }
+
+          // Client-side validation
+          var invalidName = name.length < 2;
+          var invalidEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+          var invalidPhone = !/^[+\d\s().-]{7,24}$/.test(phone);
+          var invalidInterest = !interest;
+          var invalidMessage = message.length < 10;
+
+          setFieldError('name', invalidName);
+          setFieldError('email', invalidEmail);
+          setFieldError('phone', invalidPhone);
+          setFieldError('interest', invalidInterest);
+          setFieldError('message', invalidMessage);
+
+          if (invalidName || invalidEmail || invalidPhone || invalidInterest || invalidMessage) {
+            showStatus('error', 'Please review the highlighted fields before submitting.');
+            return;
+          }
+
+          var fp = buildFingerprint(email, interest, message);
+          if (isDuplicate(fp)) {
+            showStatus('error', 'This inquiry was already submitted a moment ago. Please wait a few minutes before sending the same request again.');
+            return;
+          }
+
+          if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.indexOf('YOUR_DEPLOYMENT_ID') !== -1) {
+            showStatus('error', 'Google Apps Script endpoint URL is not configured yet. Update GOOGLE_SCRIPT_URL with your deployed /exec link.');
+            return;
+          }
+
+          var urlParams = new URLSearchParams(window.location.search);
+          var payload = {
+            name: name,
+            email: email,
+            phone: phone,
+            interest: interest,
+            message: message,
+            pageUrl: window.location.href,
+            utmSource: urlParams.get('utm_source') || '',
+            utmMedium: urlParams.get('utm_medium') || '',
+            utmCampaign: urlParams.get('utm_campaign') || '',
+            submittedAt: new Date().toISOString(),
+            website_url: honeypot
+          };
+
+          setLoading(true);
+          statusBanner.className = 'status-banner';
+
+          try {
+            // Use text/plain;charset=utf-8 so JSON transmits cleanly without triggering unsupported GAS OPTIONS preflight
+            var response = await fetch(GOOGLE_SCRIPT_URL, {
+              method: 'POST',
+              redirect: 'follow',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(payload)
+            });
+
+            var result = await response.json();
+            if (!response.ok || !result.ok) {
+              throw new Error((result && result.error) || 'Failed to record inquiry.');
+            }
+
+            saveFingerprint(fp);
+            form.reset();
+            showStatus('success', 'Thank you! Your inquiry has been received and saved. Our team will contact you shortly.');
+          } catch (err) {
+            showStatus('error', err.message || 'Network error sending your inquiry. Please try again.');
+          } finally {
+            setLoading(false);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
