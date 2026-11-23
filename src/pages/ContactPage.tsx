@@ -171,12 +171,14 @@ export function ContactPage() {
     const summarySnapshot = buildSummaryText(context);
     setLastSummary(summarySnapshot);
 
+    const trimmedMessage = values.message.trim();
+
     const payload: LeadSubmissionPayload = {
       name: values.name.trim(),
       email: values.email.trim(),
       phone: values.phone.trim(),
       interest: values.interest,
-      message: values.message.trim(),
+      message: trimmedMessage || 'No message provided',
       pageUrl: context.pageUrl,
       utmSource: context.utmSource,
       utmMedium: context.utmMedium,
@@ -458,20 +460,9 @@ export function ContactPage() {
                     rows={4}
                     value={values.message}
                     onChange={e => updateField('message', e.target.value)}
-                    aria-invalid={Boolean(fieldErrors.message)}
-                    aria-describedby={fieldErrors.message ? 'err-message' : undefined}
                     placeholder="Optional — share your objectives, preferred course or service, and timeline."
-                    className={`mt-1.5 w-full rounded-[8px] border bg-[#F7F6F2] px-3.5 py-3 text-base text-[#111114] placeholder:text-[#52525B]/70 focus:bg-[#FFFFFF] focus:outline-none sm:text-sm ${
-                      fieldErrors.message
-                        ? 'border-red-600 focus:border-red-600'
-                        : 'border-black/15 focus:border-[#6D48C5]'
-                    }`}
+                    className="mt-1.5 w-full rounded-[8px] border border-black/15 bg-[#F7F6F2] px-3.5 py-3 text-base text-[#111114] placeholder:text-[#52525B]/70 focus:border-[#6D48C5] focus:bg-[#FFFFFF] focus:outline-none sm:text-sm"
                   />
-                  {fieldErrors.message && (
-                    <p id="err-message" className="mt-1 text-xs font-medium text-red-700">
-                      {fieldErrors.message}
-                    </p>
-                  )}
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4 pt-1">
