@@ -11,7 +11,7 @@
 var CONFIG = {
   SHEET_ID: 'YOUR_GOOGLE_SHEET_ID',
   SHEET_NAME: 'Leads',
-  NOTIFY_EMAIL: 'ahmathmusharraf@gmail.com',
+  NOTIFY_EMAIL: 'mushieditz@gmail.com, ahmathmusharraf@gmail.com',
   TIMEZONE: 'Asia/Colombo', // Change to 'Asia/Dubai' or your preferred IANA timezone
   HEADERS: [
     'Timestamp',
@@ -102,9 +102,7 @@ function doPost(e) {
     if (!interest) {
       return createJsonResponse({ok: false, error: 'Please select a Course or Service.'});
     }
-    if (message.length < 10) {
-      return createJsonResponse({ok: false, error: 'Please enter a brief Message (at least 10 characters).'});
-    }
+    // Message is optional; store empty string cleanly when omitted
 
     // 3. Open target Google Sheet & ensure headers exist
     var sheet = getOrCreateLeadSheet_();
@@ -137,36 +135,21 @@ function doPost(e) {
     sheet.appendRow(safeRow);
     var rowNumber = sheet.getLastRow();
 
-    // Send optional email notification to Google Sheet owner
-    if (CONFIG.NOTIFY_EMAIL) {
-      try {
-        MailApp.sendEmail({
-          to: CONFIG.NOTIFY_EMAIL,
-          replyTo: email,
-          subject: 'New Website Lead: ' + interest + ' — ' + name,
-          body: [
-            'New inquiry received via Mushi Digital Growth Studio website:',
-            '',
-            'Timestamp: ' + formattedTimestamp,
-            'Full Name: ' + name,
-            'Email: ' + email,
-            'Phone: ' + phone,
-            'Interest: ' + interest,
-            'Lead Status: New',
-            '',
-            'Message:',
-            message,
-            '',
-            'Page URL: ' + (pageUrl || 'Direct'),
-            'UTM Source: ' + (utmSource || '-'),
-            'UTM Medium: ' + (utmMedium || '-'),
-            'UTM Campaign: ' + (utmCampaign || '-'),
-          ].join('\n'),
-        });
-      } catch (_mailErr) {
-        // Ignore email quota errors so Google Sheet row save never fails
-      }
-    }
+    // 5. Send instant email notification (plain text + formatted HTML)
+    var emailResult = sendLeadNotificationEmail_({
+      timestamp: formattedTimestamp,
+      name: name,
+      email: email,
+      phone: phone,
+      interest: interest,
+      message: message,
+      pageUrl: pageUrl,
+      utmSource: utmSource,
+      utmMedium: utmMedium,
+      utmCampaign: utmCampaign,
+      rowNumber: rowNumber,
+      sheetUrl: sheet.getParent().getUrl(),
+    });
 
     return createJsonResponse({
       ok: true,
@@ -174,6 +157,7 @@ function doPost(e) {
       rowNumber: rowNumber,
       leadStatus: 'New',
       timestamp: formattedTimestamp,
+      emailNotified: emailResult.sent,
       message: 'Your inquiry has been received and logged cleanly.',
     });
   } catch (err) {
@@ -252,6 +236,113 @@ function formatPhoneCell_(phone) {
   if (!phone) return '';
   // Prefix with apostrophe so Google Sheets preserves leading "+" or "0" as plain text
   return "'" + String(phone).trim();
+}
+
+/**
+ * Sends instant lead notification email to CONFIG.NOTIFY_EMAIL.
+ * Never throws so Google Sheet persistence always succeeds.
+ */
+function sendLeadNotificationEmail_(lead) {
+  if (!CONFIG.NOTIFY_EMAIL) {
+    return {sent: false, error: 'NOTIFY_EMAIL is blank'};
+  }
+
+  var safeMessage = lead.message || '(No message provided)';
+  var cleanPhoneHref = String(lead.phone || '').replace(/[^\d+]/g, '');
+
+  var plainBody = [
+    'New website inquiry received for Mushi Digital Growth Studio:',
+    '',
+    'Timestamp: ' + lead.timestamp,
+    'Full Name: ' + lead.name,
+    'Email: ' + lead.email,
+    'Phone: ' + lead.phone,
+    'Interest: ' + lead.interest,
+    'Lead Status: New',
+    'Sheet Row: #' + lead.rowNumber,
+    '',
+    'Message:',
+    safeMessage,
+    '',
+    'Page URL: ' + (lead.pageUrl || 'Direct'),
+    'UTM Source: ' + (lead.utmSource || '-'),
+    'UTM Medium: ' + (lead.utmMedium || '-'),
+    'UTM Campaign: ' + (lead.utmCampaign || '-'),
+    '',
+    'Open Google Sheet: ' + (lead.sheetUrl || ''),
+  ].join('\n');
+
+  var htmlBody = [
+    '<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#111114;background:#ffffff;border:1px solid #e4e4e7;border-radius:10px;overflow:hidden;">',
+    '  <div style="background:#101010;padding:20px 24px;color:#f7f6f2;">',
+    '    <p style="margin:0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#B69AFF;font-weight:700;">Mushi Digital Growth Studio</p>',
+    '    <h2 style="margin:6px 0 0;font-size:20px;line-height:1.3;">New Website Lead Received</h2>',
+    '  </div>',
+    '  <div style="padding:24px;">',
+    '    <table style="width:100%;border-collapse:collapse;font-size:14px;">',
+    '      <tr><td style="padding:8px 0;color:#52525b;width:130px;font-weight:600;">Full Name</td><td style="padding:8px 0;font-weight:600;">' + escapeHtml_(lead.name) + '</td></tr>',
+    '      <tr><td style="padding:8px 0;color:#52525b;font-weight:600;">Email</td><td style="padding:8px 0;"><a href="mailto:' + escapeHtml_(lead.email) + '" style="color:#6D48C5;">' + escapeHtml_(lead.email) + '</a></td></tr>',
+    '      <tr><td style="padding:8px 0;color:#52525b;font-weight:600;">Phone</td><td style="padding:8px 0;"><a href="tel:' + escapeHtml_(cleanPhoneHref) + '" style="color:#111114;text-decoration:none;font-weight:600;">' + escapeHtml_(lead.phone) + '</a></td></tr>',
+    '      <tr><td style="padding:8px 0;color:#52525b;font-weight:600;">Interest</td><td style="padding:8px 0;color:#6D48C5;font-weight:600;">' + escapeHtml_(lead.interest) + '</td></tr>',
+    '      <tr><td style="padding:8px 0;color:#52525b;font-weight:600;">Timestamp</td><td style="padding:8px 0;">' + escapeHtml_(lead.timestamp) + '</td></tr>',
+    '      <tr><td style="padding:8px 0;color:#52525b;font-weight:600;">Lead Status</td><td style="padding:8px 0;">New (Row #' + escapeHtml_(String(lead.rowNumber)) + ')</td></tr>',
+    '    </table>',
+    '    <div style="margin-top:16px;padding:14px 16px;background:#f7f6f2;border-radius:8px;border:1px solid #e4e4e7;">',
+    '      <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#52525b;text-transform:uppercase;">Message</p>',
+    '      <p style="margin:0;font-size:14px;line-height:1.5;white-space:pre-wrap;">' + escapeHtml_(safeMessage) + '</p>',
+    '    </div>',
+    '    <p style="margin:16px 0 0;font-size:12px;color:#52525b;">Page: ' + escapeHtml_(lead.pageUrl || 'Direct') + '<br/>UTM: ' + escapeHtml_([lead.utmSource || '-', lead.utmMedium || '-', lead.utmCampaign || '-'].join(' / ')) + '</p>',
+    (lead.sheetUrl ? '    <p style="margin:18px 0 0;"><a href="' + escapeHtml_(lead.sheetUrl) + '" style="display:inline-block;padding:10px 16px;background:#101010;color:#f7f6f2;text-decoration:none;border-radius:6px;font-size:13px;font-weight:600;">Open Leads Google Sheet</a></p>' : ''),
+    '  </div>',
+    '</div>',
+  ].join('\n');
+
+  try {
+    MailApp.sendEmail({
+      to: CONFIG.NOTIFY_EMAIL,
+      replyTo: lead.email,
+      name: 'Mushi Studio Leads',
+      subject: 'New Website Lead: ' + lead.interest + ' — ' + lead.name,
+      body: plainBody,
+      htmlBody: htmlBody,
+    });
+    return {sent: true};
+  } catch (mailErr) {
+    Logger.log('Email notification error: ' + (mailErr && mailErr.message ? mailErr.message : String(mailErr)));
+    return {sent: false, error: mailErr && mailErr.message ? mailErr.message : String(mailErr)};
+  }
+}
+
+/**
+ * IMPORTANT ONE-TIME SETUP TEST:
+ * Select "testEmailNotification" from the Run dropdown in Apps Script and click Run
+ * to authorize email sending permissions and verify instant inbox delivery.
+ */
+function testEmailNotification() {
+  var result = sendLeadNotificationEmail_({
+    timestamp: Utilities.formatDate(new Date(), CONFIG.TIMEZONE || 'Asia/Colombo', 'yyyy-MM-dd HH:mm:ss'),
+    name: 'Test Lead',
+    email: 'test@example.com',
+    phone: '+94 76 776 5080',
+    interest: 'Digital Marketing & Growth',
+    message: '',
+    pageUrl: 'https://mushieditz.vercel.app/contact.html',
+    utmSource: 'test',
+    utmMedium: 'manual',
+    utmCampaign: 'verification',
+    rowNumber: 1,
+    sheetUrl: '',
+  });
+  Logger.log(JSON.stringify(result));
+}
+
+function escapeHtml_(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 /**
