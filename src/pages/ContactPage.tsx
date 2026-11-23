@@ -111,9 +111,6 @@ export function ContactPage() {
     if (!values.interest) {
       nextErrors.interest = 'Please select the course or service you are interested in.';
     }
-    if (values.message.trim().length < 10) {
-      nextErrors.message = 'Please enter your inquiry message (at least 10 characters).';
-    }
 
     setFieldErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -132,7 +129,7 @@ export function ContactPage() {
       ...(context?.pageUrl ? [`Page URL: ${context.pageUrl}`] : []),
       '',
       'Message:',
-      values.message.trim(),
+      values.message.trim() || '(No message provided)',
     ].join('\n');
 
   const handleSubmit = async (event: FormEvent) => {
@@ -453,18 +450,17 @@ export function ContactPage() {
                     htmlFor="enquiry-message"
                     className="block text-xs font-semibold text-[#111114]"
                   >
-                    Message <span className="text-[#6D48C5]">*</span>
+                    Message <span className="font-normal text-[#52525B]">(Optional)</span>
                   </label>
                   <textarea
                     id="enquiry-message"
                     name="message"
-                    required
                     rows={4}
                     value={values.message}
                     onChange={e => updateField('message', e.target.value)}
                     aria-invalid={Boolean(fieldErrors.message)}
                     aria-describedby={fieldErrors.message ? 'err-message' : undefined}
-                    placeholder="Share your objectives, target audience, preferred course or service, and timeline."
+                    placeholder="Optional — share your objectives, preferred course or service, and timeline."
                     className={`mt-1.5 w-full rounded-[8px] border bg-[#F7F6F2] px-3.5 py-3 text-base text-[#111114] placeholder:text-[#52525B]/70 focus:bg-[#FFFFFF] focus:outline-none sm:text-sm ${
                       fieldErrors.message
                         ? 'border-red-600 focus:border-red-600'
