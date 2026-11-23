@@ -300,9 +300,8 @@
         </div>
 
         <div class="field" data-field="message">
-          <label for="message">Message <span>*</span></label>
-          <textarea id="message" name="message" required placeholder="Tell us about your project goals, course questions, or timeline."></textarea>
-          <p class="field-error" id="err-message">Please enter a message (at least 10 characters).</p>
+          <label for="message">Message <span style="color: var(--muted); font-weight: 400;">(Optional)</span></label>
+          <textarea id="message" name="message" placeholder="Optional — tell us about your project goals, course questions, or timeline."></textarea>
         </div>
 
         <button type="submit" id="submitBtn" class="submit-btn">
@@ -411,15 +410,13 @@
           var invalidEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
           var invalidPhone = !/^[+\d\s().-]{7,24}$/.test(phone);
           var invalidInterest = !interest;
-          var invalidMessage = message.length < 10;
 
           setFieldError('name', invalidName);
           setFieldError('email', invalidEmail);
           setFieldError('phone', invalidPhone);
           setFieldError('interest', invalidInterest);
-          setFieldError('message', invalidMessage);
 
-          if (invalidName || invalidEmail || invalidPhone || invalidInterest || invalidMessage) {
+          if (invalidName || invalidEmail || invalidPhone || invalidInterest) {
             showStatus('error', 'Please review the highlighted fields before submitting.');
             return;
           }
